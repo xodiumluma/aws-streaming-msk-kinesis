@@ -1,0 +1,1 @@
+From https://aws.amazon.com/solutions/implementations/streaming-data-solution-for-amazon-msk/
