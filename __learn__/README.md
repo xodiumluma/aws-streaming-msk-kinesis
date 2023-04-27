@@ -10,7 +10,7 @@ Both the [AWS Kinesis Streaming Data Solution](https://aws.amazon.com/solutions/
 - [Kinesis Streaming Data Solution Architecture](source/docs/README-Kinesis.md)
 - [MSK Streaming Data Solution Architecture](source/docs/README-MSK.md)
 - [AWS CDK Constructs](#aws-cdk-constructs)
-- [Project layout](#project-structure)
+- [Project layout](#project-layout)
 - [Deployment](#deployment)
 - [Custom builds](#creating-a-custom-build)
 - [Operational metrics collection](#collection-of-operational-metrics)
@@ -25,3 +25,5 @@ This solution uses the following CDK Constructs:
 - aws-apigateway-lambda
 - aws-kinesisfirehose-s3
 - aws-kinesisstreams-lambda
+
+## Project layout 
