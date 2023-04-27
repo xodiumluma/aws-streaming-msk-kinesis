@@ -13,4 +13,15 @@ Both the [AWS Kinesis Streaming Data Solution](https://aws.amazon.com/solutions/
 - [Project layout](#project-structure)
 - [Deployment](#deployment)
 - [Custom builds](#creating-a-custom-build)
+- [Operational metrics collection](#collection-of-operational-metrics)
+- [Known-issues](#known-issues)
+- [Resources](#resources)
 
+## AWS CDK Constructs
+The [CDK Solutions Constructs](https://aws.amazon.com/solutions/constructs/) make it convenient to create well-architected apps consistently. They are reviewed by AWS and employ the best practices put forth by the AWS Well-Architected Framework. 
+
+This solution uses the following CDK Constructs:
+- aws-apigateway-kinesisstreams
+- aws-apigateway-lambda
+- aws-kinesisfirehose-s3
+- aws-kinesisstreams-lambda
