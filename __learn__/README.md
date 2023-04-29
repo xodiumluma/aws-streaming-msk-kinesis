@@ -92,5 +92,11 @@ S3 recommendations:
 - Check bucket permissions before uploading
 
 > **Important**: Append the region as a suffix to the bucket name (i.e. _your_bucket_name-**us-east-2**_)
+```
+aws s3 sync ./global-s3-assets s3://$ARTIFACT_BUCKET-us-east-2/$SOLUTION_NAME/$VERSION --acl bucket-owner-full-control
+aws s3 sync ./regional-s3-assets s3://$ARTIFACT_BUCKET-us-east-2/$SOLUTION_NAME/$VERSION --acl bucket-owner-full-control
+```
 
-
+### E. CloudFormation template launch time
+- Copy link of template uploaded to your S3 bucket (created as \$ARTIFACT_BUCKET in the previous step)
+- Deploy the solution to your account by launching a new AWS CloudFormation stack
