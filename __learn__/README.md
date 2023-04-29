@@ -31,12 +31,17 @@ This solution uses the following CDK Constructs:
 ├── deployment
 │   └── cdk-solution-helper  [CDK synthesized templates cleanup helper]
 ├── source
- bin                  [CDK app entrypoint]
- docs                 [Each solution's architecture diagrams]
- labs                 [AWS MSK labs templates]
- kinesis              [Demo apps for KPL and Apache Flink]
- lambda               [Bespoke resources for features that CloudFormation doesn't support]
- lib
- patterns             [Stack definitions]
- test                 [Unit testing]
+│   ├── bin                  [CDK app entrypoint]
+│   ├── docs                 [Each solution's architecture diagrams]
+│   ├── labs                 [AWS MSK labs templates]
+│   ├── kinesis              [Demo apps for KPL and Apache Flink]
+│   ├── lambda               [Bespoke resources for features that CloudFormation doesn't support]
+│   ├── lib
+│   ├── patterns             [Stack definitions]
+│   ├── test                 [Unit testing]
 ```
+
+## Deployment
+Launch with one click from solution home pages:
+- [AWS Kinesis Streaming Data Solution](https://aws.amazon.com/solutions/implementations/aws-streaming-data-solution-for-amazon-kinesis)
+- [AWS MSK Streaming Data Solution](https://aws.amazon.com/solutions/implementations/aws-streaming-data-solution-for-amazon-msk)
