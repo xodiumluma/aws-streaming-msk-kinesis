@@ -45,3 +45,14 @@ This solution uses the following CDK Constructs:
 Launch with one click from solution home pages:
 - [AWS Kinesis Streaming Data Solution](https://aws.amazon.com/solutions/implementations/aws-streaming-data-solution-for-amazon-kinesis)
 - [AWS MSK Streaming Data Solution](https://aws.amazon.com/solutions/implementations/aws-streaming-data-solution-for-amazon-msk)
+> ** It is highly recommended to test the templates first before fielding to production. D'oh 🤣 **
+
+## Developing a bespoke build
+To develop a bespoke solution, do the following:
+
+### Requirements
+- [AWS CLI](https://aws.amazon.com/cli/)
+- Node.js 14.x+ / npm 7+
+- Python 3.8+
+- JDK 11 (required for Flink)
+- MAven 3.1+ (required for Flink)
