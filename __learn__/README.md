@@ -55,4 +55,28 @@ To develop a bespoke solution, do the following:
 - Node.js 14.x+ / npm 7+
 - Python 3.8+
 - JDK 11 (required for Flink)
-- MAven 3.1+ (required for Flink)
+- Maven 3.1+ (required for Flink)
+
+> **Important** The following builds all patterns; to choose only one, update the [CDK entrypoint file](`source/bin/streaming-data-solution.ts`)
+
+### A. Clone this repo
+```
+git clone https://github.com/aws-solutions/streaming-data-solution-for-amazon-kinesis-and-amazon-msk
+```
+
+### B. Run unit tests after customisations to check that your changes don't break existing code!
+```
+cd ./source
+chmod +x ./run-all-tests.sh
+./run-all-tests.sh
+```
+
+### C. Build to deploy
+> **Important**: _build-s3_ will install AWS CDK necessary to build the solution
+```
+ARTIFACT_BUCKET=your-bucket-name  # Customised code will be stored in this S3 bucket
+SOLUTION_NAME=your-solution-name  # Name of your bespoke solution
+VERSION=your-version              # Version number of your bespoke solution
+
+cd ./deployment && chmod +x ./build-s3-dist.sh && ./build-s3-dist.sh $ARTIFACT_BUCKET $SOLUTION_NAME $VERSION
+```
