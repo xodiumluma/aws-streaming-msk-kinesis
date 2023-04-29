@@ -80,3 +80,9 @@ VERSION=your-version              # Version number of your bespoke solution
 
 cd ./deployment && chmod +x ./build-s3-dist.sh && ./build-s3-dist.sh $ARTIFACT_BUCKET $SOLUTION_NAME $VERSION
 ```
+
+> ***I noticed that the solution doesn't employ CDK deploy** This solution has some Lambda functions; CDK deploy doesn't install dependencies by default (all it does is compress the contents of _fromAsset_). Maybe next time the team can investigate using [Docker](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-readme.html#bundling-asset-code) to bundle everything.
+
+> On top of this, Java code (such as demo apps for KPL and Kinesis Data Analytics) packaging is taken care of by _build-s3_.
+
+
