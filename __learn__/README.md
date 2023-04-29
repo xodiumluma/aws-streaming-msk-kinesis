@@ -27,3 +27,16 @@ This solution uses the following CDK Constructs:
 - aws-kinesisstreams-lambda
 
 ## Project layout 
+```
+├── deployment
+│   └── cdk-solution-helper  [CDK synthesized templates cleanup helper]
+├── source
+ bin                  [CDK app entrypoint]
+ docs                 [Each solution's architecture diagrams]
+ labs                 [AWS MSK labs templates]
+ kinesis              [Demo apps for KPL and Apache Flink]
+ lambda               [Bespoke resources for features that CloudFormation doesn't support]
+ lib
+ patterns             [Stack definitions]
+ test                 [Unit testing]
+```
