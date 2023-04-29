@@ -85,4 +85,12 @@ cd ./deployment && chmod +x ./build-s3-dist.sh && ./build-s3-dist.sh $ARTIFACT_B
 
 > On top of this, Java code (such as demo apps for KPL and Kinesis Data Analytics) packaging is taken care of by _build-s3_.
 
+### D. S3 Upload
+S3 recommendations:
+- Randomise your bucket names
+- Check that the buckets are private
+- Check bucket permissions before uploading
+
+> **Important**: Append the region as a suffix to the bucket name (i.e. _your_bucket_name-**us-east-2**_)
+
 
