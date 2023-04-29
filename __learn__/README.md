@@ -100,3 +100,29 @@ aws s3 sync ./regional-s3-assets s3://$ARTIFACT_BUCKET-us-east-2/$SOLUTION_NAME/
 ### E. CloudFormation template launch time
 - Copy link of template uploaded to your S3 bucket (created as \$ARTIFACT_BUCKET in the previous step)
 - Deploy the solution to your account by launching a new AWS CloudFormation stack
+
+## Operational metrics telemetry 
+To disable AWS anonymous telemetry spyware, see these:
+a) [AWS Kinesis Streaming Data Solution implementation guide](https://docs.aws.amazon.com/solutions/latest/streaming-data-solution-for-amazon-kinesis/operational-metrics.html)
+b) [AWS MSK Streaming Data Solution implementation guide](https://docs.aws.amazon.com/solutions/latest/streaming-data-solution-for-amazon-msk/operational-metrics.html)
+
+## Known issues
+- If you are using Kinesis Data Analytics, stop the app/studio notebook before deleting the stack. If it runs while the stack is being torn down, the status will change to `Updating`, and there might be errors when CloudFormation attempts to remove resources (e.g. `AWS::KinesisAnalyticsV2::ApplicationCloudWatchLoggingOption` and `Custom::VpcConfiguration` - a custom resource that sets up the app to connect to a VPC)
+
+## Resources
+### Services
+- [Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/)
+- [Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/)
+- [Kinesis Data Analytics](https://aws.amazon.com/kinesis/data-analytics/)
+- [MSK](https://aws.amazon.com/msk/)
+
+### Other
+- [Kinesis Producer Library](https://github.com/awslabs/amazon-kinesis-producer)
+- [Kinesis Replay](https://github.com/aws-samples/amazon-kinesis-replay)
+- [Kinesis Data Analytics Java Examples](https://github.com/aws-samples/amazon-kinesis-data-analytics-java-examples)
+- [Learn Flink](https://ci.apache.org/projects/flink/flink-docs-master/learn-flink/)
+- [Streaming Analytics Workshop](https://streaming-analytics.workshop.aws/flink-on-kda)
+- [MSK Data Generator](https://github.com/awslabs/amazon-msk-data-generator)
+- [MSK Labs](https://amazonmsk-labs.workshop.aws/en)
+- [MSK as an event source for Lambda](https://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/)
+- [Query MSK topics interactively with KDA Studio](https://aws.amazon.com/blogs/big-data/query-your-amazon-msk-topics-interactively-using-amazon-kinesis-data-analytics-studio/)
