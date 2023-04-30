@@ -35,7 +35,7 @@ run_python_lambda_test() {
   coverage xml -o $coverage_report_path
   coverage report --show-missing
   if [ "$?" = "1" ]; then
-    echo "(source/run-all-tests.sh) ERROR: check likely output" 1>&2
+    echo "(source/run-all-tests.sh) ERROR: examine output above" 1>&2
     exit 1
   fi
   
@@ -47,4 +47,21 @@ run_python_lambda_test() {
     # Important: further coverage reports processing is possible because we're not deleting $source_dir/test/coverage-reports
     rm -rf $venv_folder coverage .coverage
   fi
+}
+
+run_javascript_lambda_test() {
+  lambda_name=$1
+  echo "[Test] JS Lambda: $lambda_name"
+
+  npm test
+  if [ "$?" = "1" ] then 
+    echo "(source/run-all-tests.sh) ERROR: examine output above" 1>&2
+    exit 1
+  fi
+
+  [ "${CLEAN:-true}" = "true" ] && rm -rf coverage/lcov-report
+  mkdir -p $source_dir/test/coverage-reports/jest
+  coverage_report_path=$source_dir/test/coverage-reports/jest/$lambda_name
+  rm -rf $coverage_report_path
+  mv coverage $coverage_report_path
 }
