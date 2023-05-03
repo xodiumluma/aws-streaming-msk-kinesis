@@ -65,3 +65,16 @@ run_javascript_lambda_test() {
   rm -rf $coverage_report_path
   mv coverage $coverage_report_path
 }
+
+# cache current directory, write source dir
+source_dir=$PWD
+cd $source_dir
+
+# Here's a toggle to indicate whether you want to tidy up test environment before/after the tests are run
+# $CLEAN is set to 'true' by default and can be overwritten (with 'false')
+# ---> Example CLEAN=false ./run-all-tests.sh
+CLEAN="${CLEAN:-true}"
+
+# test CDK project
+run_cdk_project_test "CDK - AWS Streaming Data Solution"
+
