@@ -78,3 +78,20 @@ CLEAN="${CLEAN:-true}"
 # test CDK project
 run_cdk_project_test "CDK - AWS Streaming Data Solution"
 
+# test Lambda functions
+cd $source_dir/lambda
+for folder in */ ; do
+  cd "$folder"
+  function_name=${PWD##*/}
+
+  if [ -e "requirements.txt" ]; then
+    run_python_lambda_test $function_name
+  elif [ -e "package.json" ]; then
+    run_javascript_lambda_test $function_name
+  fi
+
+  cd ..
+done
+
+# return to where we started
+cd $source_dir
