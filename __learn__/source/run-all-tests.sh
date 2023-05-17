@@ -2,7 +2,7 @@
 #
 # Run all tests for the root CDK project + microservices + Lambda functions + dependency source packages (including unit + integration + snapshot tests)
 
-[ "$DEBUG" == 'true' ] && set -x
+[ "$DEBUG" == "true" ] && set -x
 set -e
 
 venv_folder="./v-env/"
@@ -115,5 +115,5 @@ for folder in */ ; do
   cd ..
 done
 
-# return to starting point
+# return to where we started
 cd $source_dir
