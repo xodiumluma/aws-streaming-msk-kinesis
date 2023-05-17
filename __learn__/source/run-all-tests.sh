@@ -54,7 +54,7 @@ run_javascript_lambda_test() {
   echo "[Test] JS Lambda: $lambda_name"
 
   npm test
-  if [ "$?" = "1" ] then 
+  if [ "$?" = "1" ]; then 
     echo "(source/run-all-tests.sh) ERROR: examine output above" 1>&2
     exit 1
   fi
@@ -65,3 +65,55 @@ run_javascript_lambda_test() {
   rm -rf $coverage_report_path
   mv coverage $coverage_report_path
 }
+
+run_cdk_project_test() {
+  component_description=$1
+  component_name=solutions-constructs
+  echo "[Test] $component_description"
+
+  [ "${CLEAN:-true}" = "true" ] && npm run clean
+  npm ci
+  npm run build
+  npm run test -- -u
+
+  if [ "$?" = "1" ]; then
+    echo "(source/run-all-tests.sh) ERROR: examine output above" 1>&2
+    exit
+  fi
+
+  [ "${CLEAN:-true}" = "true" ] && rm -rf coverage/lcov-report
+  mkdir -p $source_dir/test/coverage-reports/jest
+  coverage_report_path=$source_dir/test/coverage-reports/jest/$component_name
+  rm -rf $coverage_report_path
+  mv coverage $coverage_Report_path
+}
+
+# save PWD and set source dir
+source_dir=$PWD
+cd $source_dir
+
+# indicate whether you want a fresh new test environment before/after the tests are run
+# Override the CLEAN environment variable of 'true' by setting to false
+# $ CLEAN=false ./run-all-tests.sh
+CLEAN="${CLEAN:-true}"
+
+# Test CDK project
+run_cdk_project_test "CDK - AWS Streaming Data solution, ya baby!"
+
+# test Lambda functions
+cd $source_dir/lambda
+for folder in */ ; do
+  cd "$folder"
+  function_name=${PWD##*/}
+
+  if [ -e "requirements.txt" ]; then
+    run_python_lambda_test $function_name
+  elif [ -e "package.json" ]; then
+    run_javascript_lambda_test $function_name
+  fi
+
+  cd ..
+done
+
+# return to starting point
+cd $source_dir
