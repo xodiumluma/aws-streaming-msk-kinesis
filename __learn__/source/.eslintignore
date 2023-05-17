@@ -1,0 +1,8 @@
+# avoid linting these
+node_modules
+cdk.out
+dist
+test
+coverage
+*.config.js
+*.eslint*
