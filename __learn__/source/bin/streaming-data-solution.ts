@@ -1,9 +1,15 @@
+#!/usr/bin/env node
+
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
 
-import {ApiGwKdsLambda} from '../patterns/apigw-kds-lambda';
-import {AppRegistry} from '../lib/app-registry';
-import {AwsSdkConfig} from './aws-sdk-aspect';
-import {CfnNagAspect} from './cfn-nag-aspect';
-import {KdsKdaApiGw} from '../patterns/kds-kda-apigw';
-import {KdsKdfS3} from '../patterns/kds-kdf-s3';
+import { ApiGwKdsLambda } from '../patterns/apigw-kds-lambda';
+import { AppRegistry } from '../lib/app-registry';
+import { AwsSdkConfig } from './aws-sdk-aspect';
+import { CfnNagAspect } from './cfn-nag-aspect';
+import { KdsKdaApiGw } from '../patterns/kds-kda-apigw';
+import { KdsKdfS3 } from '../patterns/kds-kdf-s3';
+import { KplKdfS3 } from '../patterns/kpl-kds-kda';
+import { MskClientStack } from '../labs/msk-client-setup';
+import { MskClusterStack } from '../labs/msk-cluster-setup';
+import { MskKdaS3 } from '../patterns/msk-kda-s3';
