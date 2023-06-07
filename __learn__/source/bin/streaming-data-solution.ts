@@ -21,3 +21,19 @@ import { MskStandalone } from '../patterns/msk-standalone-cluster';
 import crypto = require('crypto');
 
 const app = new cdk.App();
+const solutionIdkKds = 'SO0124';
+const solutionIdMsk = 'SO0151';
+const solutionIdMskLabs = `${solutionIdMsk}labs`;
+
+const applyAspects = (stacks: cdk.Stack[], solutionId: string) => {
+  for (const stack of stacks) {
+    const hash = crypto.createHash('sha256').update(stack.stackName).digest('hex');
+    cdk.Aspects.of(stack).add(new AwsSdkConfig(app, `CustomUserAgent-${hash}`, solutionId));
+    cdk.Aspects.of(stack).add(new CfnNagAspect(app, `CfnNag-${hash}`));
+    cdk.Aspects.of(stack).add(
+      new AppRegistry(stack, `AppRegistry-${hash}`, {
+        solutionID: solutionId
+      });
+    );
+  }
+}
