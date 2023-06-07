@@ -20,3 +20,41 @@ After going through the defaults, change the thresholds to align better with wha
 
 ### 2. Increase number of alarms (optional)
 Unmodified - construct will add all metrics recommended in the [dev guide](https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html#kinesis-metric-use), and we can also add others (e.g. _IncomingBytes_).
+
+### 3. Define a stack
+Create a new stack class (`patterns` folder) that utilises a modified `DataStreamMonitoring` instance.
+```typescript
+import * as cdk from '@aws-sdk/core';
+import { DataStreamMonitoring } from '.../lib/kds-monitoring';
+
+export class StreamingMonitoringStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    const streamName = new cdk.CfnParameter(this, 'StreamName');
+    const lambdaFnName = new cdk.CfnParameter(this, 'FunctionName');
+    new DataStreamMonitoring(this, 'Monitoring', {
+      streamName: streamName.valueAsString,
+      lambdaFunctionName: lambdaFnName.valueAsString
+    });
+  }
+}
+```
+
+### 4. Amend entrypoint of the app
+Change the entrypoint file (`bin/streaming-data-solution.ts`) so that only the new stack is included as part of the app:
+
+```typescript
+#!/usr/bin/env node
+import 'source-map-support/register';
+import * as cdk from '@aws-cdk/core';
+imoprt {StreamingMonitoringStack} from '../patterns/streaming-monitoring-stack';
+const app = new cdk.App();
+new StreamingMonitoringStack(app, 'MonitoringStack');
+```
+
+### 5. Prepare to deploy stack
+Build the project, create the CloudFormation template
+```
+npm run build
+cdk synth > monitoring-template.yaml
+```
