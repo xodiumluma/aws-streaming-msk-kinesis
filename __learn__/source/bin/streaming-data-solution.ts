@@ -115,3 +115,36 @@ const createsolutionMskStacks = () => {
   applyAspects(stacks, solutionIdMsk);
 };
 
+const createSolutionMskLabsStacks = () => {
+  const stacks: cdk.Stack[] = [];
+
+  stacks.push(new MskLambdaRoleStack(app,
+    'amazon-msk-labs-lambda-role',
+    {
+      description: `(${solutionIdMskLabs}) - AWS MSK Labs (IAM Role) - version %%VERSION%%`,
+      solutionId: solutionIdMskLabs
+    }
+  ));
+
+  stacks.push(new MskClientStack(app,
+    'amazon-msk-labs-ec2-client',
+    {
+      description: `(${solutionIdMskLabs}) - AWS MSK Labs (EC2 client) - version %%VERSION%%`,
+      solutionId: solutionIdMskLabs
+    }
+  ));
+
+  stacks.push(new MskClusterStack(app,
+    'amazon-msk-labs-cluster',
+    {
+      description: `(${solutionIdMskLabs}) - AWS MSK Labs (MSK cluster) - version %%VERSION%%`,
+      solutionId: solutionIdMskLabs
+    }
+  ));
+
+  applyAspects(stacks, solutionIdMskLabs);
+};
+
+createSolutionKinesisStacks();
+createSolutionMskStacks();
+createSolutionMskLabsStacks();
