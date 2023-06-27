@@ -21,7 +21,7 @@ import { MskStandalone } from '../patterns/msk-standalone-cluster';
 import crypto = require('crypto');
 
 const app = new cdk.App();
-const solutionIdkKds = 'SO0124';
+const solutionIdKds = 'SO0124';
 const solutionIdMsk = 'SO0151';
 const solutionIdMskLabs = `${solutionIdMsk}labs`;
 
@@ -75,5 +75,43 @@ const createSolutionKinesisStacks = () => {
 
   applyAspects(stacks, solutionIdKds);
 
+};
+
+const createsolutionMskStacks = () => {
+  const stacks: cdk.Stack[] = [];
+
+  stacks.push(new MskStandalone(app,
+    'streaming-data-solution-for-msk',
+    {
+      description: `(${solutionIdMsk}) - AWS MSK Streaming Data Solution - version %%VERSION%%`,
+      solutionId: solutionIdMsk
+    }
+  ));
+
+  stacks.push(new MskLambda(app,
+    'streaming-data-solution-for-msk-using-aws-lambda',
+    {
+      description: `(${solutionIdMsk}) - AWS MSK Streaming Data Solution (MSK -> Lambda) - version %%VERSION%%`,
+      solutionId: solutionIdMsk
+    }
+  ));
+
+  stacks.push(new MskLambdaKdf(app,
+    'streaming-data-solution-for-msk-using-aws-lambda-and-kinesis-data-firehose',
+    {
+      description: `(${solutionIdMsk}) - AWS MSK Streaming Data Solution (MSK -> Lambda -> KDF) - version %%VERSION%%`,
+      solutionId: solutionIdMsk
+    }
+  ));
+
+  stacks.push(new MskKdaS3(app,
+    'streaming-data-solution-for-msk-using-kinesis-data-analytics-and-amazon-s3',
+    {
+      description: `(${solutionIdMsk}) - AWS MSK Streaming Data Solution (MSK -> KDA -> S3) - version %%VERSION%%`,
+      solutionId: solutionIdMsk
+    }
+  ));
+
+  applyAspects(stacks, solutionIdMsk);
 };
 
