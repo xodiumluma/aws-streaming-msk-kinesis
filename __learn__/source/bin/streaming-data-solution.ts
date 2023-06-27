@@ -36,4 +36,44 @@ const applyAspects = (stacks: cdk.Stack[], solutionId: string) => {
       });
     );
   }
-}
+};
+
+const createSolutionKinesisStacks = () => {
+  const stacks: cdk.Stack[] = [];
+
+  stacks.push(new ApiGwKdsLambda(app,
+    'streaming-data-solution-for-kinesis-using-api-gateway-and-lambda',
+    {
+      description: `(${solutionIdKds}) - AWS Kinesis Streaming Data Solution (APIGW -> KDS -> Lambda) - version %%VERSION%%`,
+      solutionId: solutionIdKds
+    }
+  ));
+
+  stacks.push(new KplKdsKda(app,
+    'streaming-data-solution-for-kinesis-using-kpl-and-kinesis-data-analytics',
+    {
+      description: `(${solutionIdKds}) - AWS Kinesis Streaming Data Solution (KPL -> KDS -> KDA) - version %%VERSION%%`,
+      solutionId: solutionIdKds
+    }
+  ));
+
+  stacks.push(new KdsKdfS3(app,
+    'streaming-data-solution-for-kinesis-using-kinesis-data-firehose-and-amazon-s3',
+    {
+      description: `(${solutionIdKds}) - AWS Kinesis Streaming Data Solution (KDS -> KDF -> S3) - version %%VERSION%%`,
+      solutionId: solutionIdKds
+    }
+  ));
+
+  stacks.push(new KdsKdaApiGw(app,
+    'streaming-data-solution-for-kinesis-using-kinesis-data-analytics-and-api-gateway',
+    {
+      description: `(${solutionIdKds}) - AWS Kinesis Streaming Data Solution (KDS -> KDF -> S3) - version %%VERSION%%`,
+      solutionId: solutionIdKds
+    }
+  ));
+
+  applyAspects(stacks, solutionIdKds);
+
+};
+
